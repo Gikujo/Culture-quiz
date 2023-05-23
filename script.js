@@ -35,6 +35,12 @@ const questions = [
     answers: ["Apollo 9", "Mercury 1", "Apollo 13", "Gemini 2"],
     correctAnswerIndex: 2,
   },
+  {
+    question:
+      "Quelle est la couleur ?",
+    answers: ["bleu", "25", "rouge", "les deux"],
+    correctAnswerIndex: 1,
+  }
 ];
 
 /********* NE PAS MODIFIER AU DESSUS DE CETTE LIGNE *********/
@@ -42,6 +48,7 @@ const questionEl = document.querySelector('#question');
 const answerListEl = document.querySelector('#answers');
 const resultContainerEl = document.querySelector('#result-container');
 const scoreEl = document.querySelector('#score');
+const questionsNumber = questions.length;
 let questionIndex = 0;
 let score = 0;
 
@@ -54,18 +61,19 @@ function repondreQuestion(reponse) {
   }
 
   questionIndex++;
-
   afficherQuestion(questionIndex);
 }
 
 
 function afficherQuestion(questionIndex) {
 
-  if (questionIndex == 4) {
+  if (questionIndex == questions.length) {
     questionEl.innerHTML = "Merci d'avoir répondu :-)";
-    answerListEl.innerHTML = "";
 
-    scoreEl.innerHTML = score;
+    html = `<li id="reload-button" onclick="reloadPage()">Recommencer</li>`;
+    answerListEl.innerHTML = html;
+
+    scoreEl.innerHTML = `${score} / ${questions.length}`;
   } else {
 
     questionEl.innerHTML = questions[questionIndex].question;
@@ -79,9 +87,13 @@ function afficherQuestion(questionIndex) {
     })
     answerListEl.innerHTML = html;
 
-    scoreEl.innerHTML = score;
+    scoreEl.innerHTML = `${score} / ${questions.length}`;
   }
 
+}
+
+function reloadPage() {
+  location.reload();
 }
 
 afficherQuestion(questionIndex);
@@ -89,6 +101,7 @@ afficherQuestion(questionIndex);
 /*************************/
 /* Contenu du DOM chargé */
 /*************************/
+
 document.addEventListener("DOMContentLoaded", () => {
 
   // démarrage du quizz
