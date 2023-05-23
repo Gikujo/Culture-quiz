@@ -49,7 +49,7 @@ let score = 0;
 function repondreQuestion(reponse) {
   console.log(reponse);
 
-  if (reponse === questions[questionIndex].correctAnswerIndex) {
+  if (reponse == questions[questionIndex].correctAnswerIndex) {
     score++;
   }
 
@@ -61,18 +61,26 @@ function repondreQuestion(reponse) {
 
 function afficherQuestion(questionIndex) {
 
-  questionEl.innerHTML = questions[questionIndex].question;
+  if (questionIndex == 4) {
+    questionEl.innerHTML = "Merci d'avoir répondu :-)";
+    answerListEl.innerHTML = "";
 
-  let html = '';
-  let answerIndex = 0;
+    scoreEl.innerHTML = score;
+  } else {
 
-  questions[questionIndex].answers.forEach(answer => {
-    html += `<li class="answer" id="${answerIndex}" onclick="repondreQuestion(${answerIndex})">${answer}</li>`
-    answerIndex++;
-  })
-  answerListEl.innerHTML = html;
+    questionEl.innerHTML = questions[questionIndex].question;
 
-  scoreEl.innerHTML = score;
+    let html = '';
+    let answerIndex = 0;
+
+    questions[questionIndex].answers.forEach(answer => {
+      html += `<li class="answer" id="${answerIndex}" onclick="repondreQuestion(${answerIndex})">${answer}</li>`
+      answerIndex++;
+    })
+    answerListEl.innerHTML = html;
+
+    scoreEl.innerHTML = score;
+  }
 
 }
 
