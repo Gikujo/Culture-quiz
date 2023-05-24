@@ -34,16 +34,17 @@ const questions = [
       "Quel est le nom de la mission spatiale lunaire, menée par la NASA, dont l'équipage a du annuler son allunissage suite à une explosion pendant le voyage ?",
     answers: ["Apollo 9", "Mercury 1", "Apollo 13", "Gemini 2"],
     correctAnswerIndex: 2,
-  },
-  {
-    question:
-      "Quelle est la couleur ?",
-    answers: ["bleu", "25", "rouge", "les deux"],
-    correctAnswerIndex: 1,
   }
 ];
 
 /********* NE PAS MODIFIER AU DESSUS DE CETTE LIGNE *********/
+questions.push({
+  question:
+    "Quelle est la couleur ?",
+  answers: ["bleu", "25", "rouge", "les deux"],
+  correctAnswerIndex: 1,
+});
+
 const questionEl = document.querySelector('#question');
 const answerListEl = document.querySelector('#answers');
 const resultContainerEl = document.querySelector('#result-container');
@@ -51,7 +52,6 @@ const scoreEl = document.querySelector('#score');
 const questionsNumber = questions.length;
 let questionIndex = 0;
 let score = 0;
-
 
 function repondreQuestion(reponse) {
   console.log(reponse);
@@ -85,6 +85,7 @@ function afficherQuestion(questionIndex) {
       html += `<li class="answer" id="${answerIndex}" onclick="repondreQuestion(${answerIndex})">${answer}</li>`
       answerIndex++;
     })
+
     answerListEl.innerHTML = html;
 
     scoreEl.innerHTML = `${score} / ${questions.length}`;
@@ -96,7 +97,6 @@ function reloadPage() {
   location.reload();
 }
 
-afficherQuestion(questionIndex);
 
 /*************************/
 /* Contenu du DOM chargé */
@@ -105,5 +105,5 @@ afficherQuestion(questionIndex);
 document.addEventListener("DOMContentLoaded", () => {
 
   // démarrage du quizz
-
+  afficherQuestion(questionIndex);
 });
